@@ -92,8 +92,8 @@ Node * removeNode(Node * raiz, int data){
 		} else {
 			if (raiz->left == NULL && raiz->right == NULL){
 				free(raiz);
-				(raiz) = NULL;
-				return NULL;
+				raiz = NULL;
+				
 			} else {
 				Node * aux;
 				if (raiz->left == NULL) {  //se ele só tem filhos na direita
@@ -153,10 +153,11 @@ int main(){
 
 	printf("%d\n", achar->data);
 	
-	raiz = removeNode(raiz, 1);
+	raiz = removeNode(raiz, 10);
 	
 	imprimeArv(raiz);
-
+	printf("\n");
+	
 	return 0;
 }
 
