@@ -81,7 +81,7 @@ Node *searchInOrder(Node * tree, int data){
 }
 
 Node * removeNode(Node * raiz, int data){
-	Node * aux; 
+	
 
 	if (raiz != NULL){
 		//se está na direita
@@ -89,44 +89,37 @@ Node * removeNode(Node * raiz, int data){
 			(raiz->right) = removeNode((raiz)->right, data);
 		} else if (data < (raiz)->data){
 			(raiz->left) = removeNode((raiz)->left, data);
-		}
-
-		aux = raiz;
-
-		if ((raiz)->left == NULL && (raiz)->right == NULL){
-			free(aux);
-			(raiz) = NULL;
-			return NULL;
 		} else {
-			if ((raiz)->left == NULL) {
-				(raiz) = (raiz)->right;
-				aux->right = NULL;
-				free(aux);
-				aux = NULL;
-				return raiz;
-			} else if ((raiz->right) == NULL) {
-				(raiz) = (raiz)->left;
-				aux->left = NULL;
-				free(aux);
-				aux = NULL;
-				return raiz;
+			if (raiz->left == NULL && raiz->right == NULL){
+				free(raiz);
+				(raiz) = NULL;
+				return NULL;
 			} else {
-				Node * aux2 = raiz->left;
-				while (aux2->right != NULL){
-					aux2 = aux2->right;
-				}
+				Node * aux;
 
-				raiz->data = aux2->data;
-				aux2->data = data;
-
-				return removeNode(raiz->left, data);
-
+				if (raiz->left == NULL) {  //se ele só tem filhos na direita
+                    aux = raiz;
+                    raiz = raiz->right;
+                    free(aux);
+                } else if (raiz->right == NULL) { //se ele só tem filhos na esquerda
+                	aux = raiz;
+                    raiz = raiz->left;
+                    free(aux);
+                } else {    //se tem filhos nos 2 lados
+                	Node * aux = malloc(sizeof(Node));
+                    aux = raiz->left;
+                    while (aux->right != NULL){
+                        aux = aux->right;
+                    }
+                    raiz->data = aux->data;
+                    aux->data = data;
+                    raiz->left = removeNode(raiz->left, data);
+                }
 			}
 		}
-
 	}
 
-	return aux;
+	return raiz;
 
 }
 
@@ -151,6 +144,9 @@ int main(){
 
 	raiz = insertTree(raiz, 1);
 	raiz = insertTree(raiz, 3);
+	raiz = insertTree(raiz, 8);
+	raiz = insertTree(raiz, 10);
+	raiz = insertTree(raiz, 9);
 
 	imprimeArv(raiz);
 	printf("\n");
@@ -159,7 +155,7 @@ int main(){
 
 	printf("%d\n", achar->data);
 	
-	raiz = removeNode(raiz, 2);
+	raiz = removeNode(raiz, 1);
 	
 	imprimeArv(raiz);
 
