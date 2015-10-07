@@ -96,31 +96,29 @@ Node * removeNode(Node * raiz, int data){
 				return NULL;
 			} else {
 				Node * aux;
-
 				if (raiz->left == NULL) {  //se ele só tem filhos na direita
-                    aux = raiz;
-                    raiz = raiz->right;
-                    free(aux);
-                } else if (raiz->right == NULL) { //se ele só tem filhos na esquerda
-                	aux = raiz;
-                    raiz = raiz->left;
-                    free(aux);
-                } else {    //se tem filhos nos 2 lados
-                	Node * aux = malloc(sizeof(Node));
-                    aux = raiz->left;
-                    while (aux->right != NULL){
-                        aux = aux->right;
-                    }
-                    raiz->data = aux->data;
-                    aux->data = data;
-                    raiz->left = removeNode(raiz->left, data);
-                }
+                    			aux = raiz;
+					raiz = raiz->right;
+		                    	free(aux);
+		                } else if (raiz->right == NULL) { //se ele só tem filhos na esquerda
+		                	aux = raiz;
+					raiz = raiz->left;
+		                    	free(aux);
+		                } else {    //se tem filhos nos 2 lados
+		                	Node * aux = malloc(sizeof(Node));
+		                    	aux = raiz->left;
+		                    	while (aux->right != NULL) {
+		                        	aux = aux->right;
+					}
+					raiz->data = aux->data;
+		                    	aux->data = data;
+		                    	raiz->left = removeNode(raiz->left, data);
+				}
 			}
 		}
 	}
 
 	return raiz;
-
 }
 
 
