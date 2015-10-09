@@ -225,14 +225,6 @@ int main(){
     //imprimeArv(raiz);
     //printf("\n");
     
-    
-    //Node * predes = predecessor(raiz, 2);
-    //    printf("Predecessor: %d\n", predecessor2(raiz, 9)->data);
-    
-    //printf("Sucessor: %d\n", sucessor(raiz, 7)->data);
-    
-    //printf("Pai: %d\n", paiDe(raiz, 10)->data);
-    
     //printf("Maiores: %d\n", elementosMaioresQue(raiz, 1));
     printf("Altura: %d\n", alturaDeArvore(raiz));
     
